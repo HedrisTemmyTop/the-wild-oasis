@@ -5,7 +5,6 @@ import CabinCard from "./CabinCard";
 export default async function CabinList({ filter }: { filter: string }) {
   //   noStore();
   const cabins: CabinInteface[] = await getCabins();
-  console.log(cabins, "cabins");
   let displayedCabins: CabinInteface[] = [];
   if (filter === "all") displayedCabins = cabins;
   if (filter === "small")

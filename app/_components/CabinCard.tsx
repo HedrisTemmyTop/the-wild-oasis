@@ -1,6 +1,7 @@
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { CabinInteface } from "../interface/interface";
 import Image from "next/image";
+import Link from "next/link";
 interface PropTypes {
   cabin: CabinInteface;
 }
@@ -14,7 +15,7 @@ function CabinCard({ cabin }: PropTypes) {
         width={100}
         height={100}
         alt={`Cabin ${name}`}
-        className="flex-1 border-r border-primary-800"
+        className="flex-1 border-r border-primary-800 object-cover"
       />
 
       <div className="flex-grow">
@@ -48,12 +49,12 @@ function CabinCard({ cabin }: PropTypes) {
         </div>
 
         <div className="bg-primary-950 border-t border-t-primary-800 text-right">
-          <a
+          <Link
             href={`/cabins/${id}`}
             className="border-l border-primary-800 py-4 px-6 inline-block hover:bg-accent-600 transition-all hover:text-primary-900"
           >
             Details & reservation &rarr;
-          </a>
+          </Link>
         </div>
       </div>
     </div>

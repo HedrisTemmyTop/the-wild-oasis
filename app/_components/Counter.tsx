@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 
 export default function Counter({ users }: { users: [] }) {
-  console.log(users);
   const [counter, setCounter] = useState(0);
   return (
     <div>

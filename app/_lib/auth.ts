@@ -1,13 +1,14 @@
 import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+// import GoogleProvider from "next-auth/providers/google";
 import { SessionInterface, UserInterface } from "../interface/interface";
 import { createGuest, getGuest } from "./data-service";
+import google from "next-auth/providers/google";
 // import Google from "next/auth/providers/google";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
 const authConfig: any = {
   providers: [
-    GoogleProvider({
+    google({
       clientId: process.env.AUTH_GOOGLE_ID,
       clientSecret: process.env.AUTH_GOOGLE_SECRET,
     }),
@@ -19,13 +20,11 @@ const authConfig: any = {
     async signIn({ user }: { user: UserInterface }) {
       try {
         const existingGuest = await getGuest(user.email);
-        console.log("existing user", existingGuest);
         if (!existingGuest) {
           await createGuest({
             email: user.email,
             fullName: user.name,
           });
-          console.log("guest is successfully created");
         }
 
         return true;

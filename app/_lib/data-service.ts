@@ -95,10 +95,8 @@ export async function createBookings() {
       };
   });
 
-  console.log(finalBookings);
-
-  const { error } = await supabase.from("bookings").insert(finalBookings);
-  if (error) console.log(error.message);
+  
+  await supabase.from("bookings").insert(finalBookings);
 }
 
 export const getCabins = async function () {
@@ -107,9 +105,6 @@ export const getCabins = async function () {
     .select("id, name, maxCapacity, regularPrice, discount, image, description")
     .order("name");
 
-  // await new Promise((res) => setTimeout(res, 3000));
-  console.log("cabin data", data);
-  console.log(error);
   if (error) {
     console.error(error);
     throw new Error("Cabins could not be loaded");
@@ -241,11 +236,8 @@ export async function getCountries() {
 // CREATE
 
 export async function createGuest(newGuest: Partial<Guest>) {
-  console.log("new guest");
   const { data, error } = await supabase.from("guests").insert([newGuest]);
-  console.log("guest created", data);
   if (error) {
-    console.error(error);
     throw new Error("Guest could not be created");
   }
 
@@ -316,7 +308,6 @@ export async function deleteBooking(id: string) {
 }
 
 export async function createCabins() {
-  const { error, data } = await supabase.from("cabins").insert(cabins);
-  console.log("data", data);
-  if (error) console.log(error.message);
+await supabase.from("cabins").insert(cabins);
+
 }

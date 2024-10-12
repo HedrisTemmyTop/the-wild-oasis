@@ -77,7 +77,6 @@ export async function updateReservation(formData: FormData) {
   const session = (await auth()) as SessionInterface;
   const guestBookings = await getBookings(session.user.guestId as string);
   const reservationId = formData.get("reservationId") as string;
-  console.log(guestBookings, reservationId, "reservationId");
   const guestBookingsId = guestBookings.map((booking) => +booking.id);
   const bookingIdNum: number = Number(reservationId);
 
@@ -115,7 +114,6 @@ export async function createReservation(
   formData: FormData
 ) {
   const session = (await auth()) as SessionInterface;
-  console.log(bookingData, "booking data");
   const newBooking = {
     ...bookingData,
     guestId: session.user.guestId,
@@ -128,7 +126,6 @@ export async function createReservation(
   };
   if (session?.user) {
     const { error } = await supabase.from("bookings").insert([newBooking]);
-    console.log(error);
     if (error) throw new Error("Booking could not be created");
     revalidatePath(`/cabins/${bookingData.cabinId}`);
     redirect("/cabins/thankyou");

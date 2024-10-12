@@ -18,7 +18,6 @@ function ReservationCard({
   booking: BookingsInterface;
   onDelete: (bookingId: string) => void;
 }) {
-  console.log("booking", booking);
   const {
     id,
 
